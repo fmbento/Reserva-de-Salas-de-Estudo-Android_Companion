@@ -15,6 +15,7 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.webkit.JavascriptInterface
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -92,6 +93,25 @@ class MainViewModel : ViewModel() {
 class MainActivity : ComponentActivity() {
     private lateinit var networkMonitor: NetworkMonitor
     private val viewModel: MainViewModel by viewModels()
+    private var activeWebView: WebView? = null
+
+    private val qrScannerLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            val scannedUrl = result.data?.getStringExtra("scanned_url")
+            if (!scannedUrl.isNullOrEmpty()) {
+                activeWebView?.post {
+                    activeWebView?.evaluateJavascript("window.handleScannedQR('$scannedUrl')", null)
+                }
+            }
+        }
+    }
+
+    fun openNativeQRScanner() {
+        val intent = Intent(this, QRScannerActivity::class.java)
+        qrScannerLauncher.launch(intent)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -175,6 +195,7 @@ class MainActivity : ComponentActivity() {
                                     },
                                     onWebViewCreated = { webView ->
                                         webViewInstance = webView
+                                        this@MainActivity.activeWebView = webView
                                     }
                                 )
 
@@ -262,6 +283,11 @@ fun ImmersiveWebView(
             // Set native User-Agent override
             val defaultUa = settings.userAgentString
             settings.userAgentString = "$defaultUa ReservaSalasCompanionAndroid/1.0"
+
+            val mainActivity = context as? MainActivity
+            if (mainActivity != null) {
+                addJavascriptInterface(WebAppInterface(mainActivity), "AndroidBridge")
+            }
 
             webViewClient = object : WebViewClient() {
                 override fun shouldOverrideUrlLoading(
@@ -673,5 +699,12 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 fun GreetingPreview() {
     MyApplicationTheme {
         Greeting("Android")
+    }
+}
+
+class WebAppInterface(private val activity: MainActivity) {
+    @JavascriptInterface
+    fun startQRScanner() {
+        activity.openNativeQRScanner()
     }
 }
