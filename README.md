@@ -1,4 +1,4 @@
-# Reserva de Salas: SiReS UA Android Companion App 📱✨
+# Reserva de Salas UA: Android Companion App 📱✨
 
 O **Reserva de Salas** é um wrapper móvel nativo e inteligente para o portal de reservas de salas de estudo **SiReS UA**. Desenvolvido em **Kotlin** e **Jetpack Compose**, proporciona uma experiência móvel fluida, imersiva, resiliente a falhas de rede e com integração nativa avançada para agilizar o dia a dia dos estudantes.
 
