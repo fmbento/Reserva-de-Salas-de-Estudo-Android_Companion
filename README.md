@@ -24,14 +24,11 @@ O **Reserva de Salas** é um wrapper móvel nativo e inteligente para o portal d
 ---
 # User Interface
 <img width="308" alt="image" alt="image" src="https://github.com/user-attachments/assets/2858afd3-97f0-4dd4-86cd-ed6d3b00089d" />  <img width="308" alt="image" src="https://github.com/user-attachments/assets/9113bdc1-0bb0-45eb-91d6-41c7f5547eb6" />  <img width="308"  alt="image" src="https://github.com/user-attachments/assets/3a0ce6b5-9c01-42bf-a8c7-3ba0136dd2e1" />
-<br/><br/>
+
 <img width="308" alt="image" src="https://github.com/user-attachments/assets/336f6c66-8d41-4fd1-890a-3a53dd3bc58e" />  <img width="308" alt="image" src="https://github.com/user-attachments/assets/279888a7-6ea0-42bd-bcba-944992af2654" />  <img width="308" alt="image" src="https://github.com/user-attachments/assets/8d345cb7-6251-44ac-b586-d6c0f64f2ff6" />
-
-
-
-
-
-
+<br/><br/>
+#### Depois de ler o QR Code da Sala:
+<img width="308" alt="image" src="https://github.com/user-attachments/assets/a702a992-7a0d-42eb-8195-b791582c403b" />
 
 
 ## 🛠️ Stack Tecnológica
